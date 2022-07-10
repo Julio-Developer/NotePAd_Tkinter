@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import libraries
+from cgitb import text
 import tkinter
 
 # Crete a TKinter window
@@ -22,6 +23,12 @@ def open_file():
     file_open = file.read()
     text_area.insert(1.0, file_open)
 
+def update_fonte():
+    size = spin_size.get()
+    font = spin_font.get()
+    text_area.config(font=f'{font} {size}')
+    
+
 window.title("Bloco de Notas com TKinter")
 window.minsize(width=1280, height=720)
 # window.geometry("1280x720")
@@ -33,8 +40,8 @@ frame.pack(fill='x')
 font_text = tkinter.Label(frame, text='Font:' )
 font_text.pack(side='left')
 
-spin_font_size = tkinter.Spinbox(frame, values=('Arial', 'Verdana'))
-spin_font_size.pack(side='left')
+spin_font = tkinter.Spinbox(frame, values=('Arial', 'Verdana'))
+spin_font.pack(side='left')
 
 # Area of text
 text_area = tkinter.Text(window, font='Arial 15 bold', width=1280, height=720)
@@ -45,6 +52,9 @@ font_size.pack(side='left')
 
 spin_size = tkinter.Spinbox(frame, from_=0, to=60)
 spin_size.pack(side='left')
+
+button_update = tkinter.Button(frame, text='Set', command=update_fonte)
+button_update.pack(side='left')
 
 #  Create a menu main and options
 
