@@ -17,16 +17,34 @@ def save():
     file_save.write(text)
     file_save.close()
 
-def save_as():
-    print('Save as')
+def open_file():
+    file = open('file.txt', 'r')
+    file_open = file.read()
+    text_area.insert(1.0, file_open)
 
 window.title("Bloco de Notas com TKinter")
 window.minsize(width=1280, height=720)
 # window.geometry("1280x720")
 
+# Toolbar
+frame = tkinter.Frame(window, height=30)
+frame.pack(fill='x')
+
+font_text = tkinter.Label(frame, text='Font:' )
+font_text.pack(side='left')
+
+spin_font_size = tkinter.Spinbox(frame, values=('Arial', 'Verdana'))
+spin_font_size.pack(side='left')
+
 # Area of text
 text_area = tkinter.Text(window, font='Arial 15 bold', width=1280, height=720)
 text_area.pack()
+
+font_size=tkinter.Label(frame, text='font size: ')
+font_size.pack(side='left')
+
+spin_size = tkinter.Spinbox(frame, from_=0, to=60)
+spin_size.pack(side='left')
 
 #  Create a menu main and options
 
@@ -34,7 +52,7 @@ menu = tkinter.Menu(window)
 
 file = tkinter.Menu(window, tearoff=0)
 file.add_command(label="New", command=new_file)
-file.add_command(label= 'Save As', command=save_as)
+file.add_command(label= 'Open', command=open_file)
 file.add_command(label='Save', command=save)
 file.add_command(label='Exit', command=window.quit)
 
